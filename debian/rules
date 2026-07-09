@@ -1,0 +1,38 @@
+#!/usr/bin/make -f
+DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+STARSHIP_VERSION := $(shell dpkg-parsechangelog -S Version | sed 's/[-~].*//')
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+
+override_dh_auto_build:
+	@arch="$(DEB_HOST_ARCH)"; \
+	case "$$arch" in \
+		amd64)   STARSHIP_RELEASE="starship-x86_64-unknown-linux-musl" ;; \
+		arm64)   STARSHIP_RELEASE="starship-aarch64-unknown-linux-musl" ;; \
+		armhf)   STARSHIP_RELEASE="starship-arm-unknown-linux-musleabihf" ;; \
+		i386)    STARSHIP_RELEASE="starship-i686-unknown-linux-musl" ;; \
+		riscv64) STARSHIP_RELEASE="starship-riscv64gc-unknown-linux-musl" ;; \
+		*) echo "Unsupported architecture: $$arch"; exit 1 ;; \
+	esac; \
+	echo "Downloading $$STARSHIP_RELEASE for v$(STARSHIP_VERSION)..."; \
+	wget -q "https://github.com/starship/starship/releases/download/v$(STARSHIP_VERSION)/$$STARSHIP_RELEASE.tar.gz"; \
+	tar -xf "$$STARSHIP_RELEASE.tar.gz"; \
+	rm -f "$$STARSHIP_RELEASE.tar.gz"; \
+	echo "$$STARSHIP_RELEASE" > .starship_release_name
+
+override_dh_auto_install:
+	@install -D -m 755 starship debian/starship/usr/bin/starship
+
+override_dh_auto_test:
+
+override_dh_auto_clean:
+	@if [ -f .starship_release_name ]; then \
+		rm -f starship .starship_release_name || true; \
+	fi
+
+override_dh_strip:
+
+override_dh_shlibdeps:

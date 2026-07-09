@@ -1,0 +1,17 @@
+Source: starship
+Section: utils
+Priority: optional
+Maintainer: Dario Griffo <dariogriffo@gmail.com>
+Build-Depends: debhelper-compat (= 13), wget, ca-certificates
+Standards-Version: 4.6.2
+Homepage: https://github.com/starship/starship
+Rules-Requires-Root: no
+
+Package: starship
+Architecture: amd64 arm64 armhf i386 riscv64
+Depends: ${misc:Depends}
+Description: The minimal, blazing-fast, and infinitely customizable prompt for any shell
+ Starship is a minimal, blazing-fast, and infinitely customizable prompt for
+ any shell. It shows the information you need while you work, without
+ slowing you down, and is compatible with most common shells and terminal
+ emulators.
