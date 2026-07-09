@@ -3,7 +3,7 @@ Priority: optional
 Maintainer: Dario Griffo <dariogriffo@gmail.com>
 Homepage: https://github.com/starship/starship
 Package: starship
-Version: starship_VERSION-BUILD_VERSION+DIST
+Version: starship_VERSION-BUILD_VERSION~DIST
 Architecture: SUPPORTED_ARCHITECTURES
 Description: The minimal, blazing-fast, and infinitely customizable prompt for any shell.
 
