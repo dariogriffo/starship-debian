@@ -26,6 +26,8 @@ install on Debian. If you're looking for the starship source code, see
 
 ## Install/Update
 
+📖 **Step-by-step install guide:** [Debian](https://debian.griffo.io/install-latest-starship-in-debian.html) · [Ubuntu](https://debian.griffo.io/install-latest-starship-in-ubuntu.html)
+
 ### The Debian way
 
 ```sh
